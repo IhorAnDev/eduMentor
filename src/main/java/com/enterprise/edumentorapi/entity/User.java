@@ -1,5 +1,6 @@
 package com.enterprise.edumentorapi.entity;
 
+import com.enterprise.edumentorapi.enums.UserRole;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -34,7 +35,7 @@ public class User {
     private String password;
 
     @Column(name = "created_at")
-    private Date createdAt;
+    private Date createdAt = new Date();
 
     @Column(name = "updated_at")
     private Date updatedAt;
@@ -42,6 +43,9 @@ public class User {
     @OneToMany(mappedBy = "student", cascade = CascadeType.ALL)
     @ToString.Exclude
     private Set<CompanyStudent> companyStudents;
+
+    @Enumerated(EnumType.STRING)
+    private UserRole userRole;
 
     @OneToOne
     @JoinColumn(name = "company_id")

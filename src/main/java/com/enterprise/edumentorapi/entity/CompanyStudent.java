@@ -1,5 +1,6 @@
 package com.enterprise.edumentorapi.entity;
 
+import com.enterprise.edumentorapi.enums.CompanyRole;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -16,6 +17,9 @@ public class CompanyStudent {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long Id;
+
+    @Enumerated(EnumType.STRING)
+    private CompanyRole role;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
