@@ -10,6 +10,7 @@ import java.util.Set;
 
 @Entity
 @ToString
+@Builder
 @Getter
 @Setter
 @NoArgsConstructor
