@@ -5,7 +5,7 @@ import com.enterprise.edumentorapi.dao.request.SignUpRequest;
 import com.enterprise.edumentorapi.dao.response.JwtAuthenticationResponse;
 import com.enterprise.edumentorapi.entity.User;
 import com.enterprise.edumentorapi.enums.UserRole;
-import com.enterprise.edumentorapi.repositiry.UserRepository;
+import com.enterprise.edumentorapi.repository.UserRepository;
 import com.enterprise.edumentorapi.security.PersonDetails;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;

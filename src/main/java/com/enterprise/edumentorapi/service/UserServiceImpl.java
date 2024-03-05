@@ -1,7 +1,7 @@
 package com.enterprise.edumentorapi.service;
 
 import com.enterprise.edumentorapi.entity.User;
-import com.enterprise.edumentorapi.repositiry.UserRepository;
+import com.enterprise.edumentorapi.repository.UserRepository;
 import com.enterprise.edumentorapi.security.PersonDetails;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
