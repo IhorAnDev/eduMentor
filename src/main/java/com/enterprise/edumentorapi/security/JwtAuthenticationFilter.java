@@ -1,7 +1,7 @@
 package com.enterprise.edumentorapi.security;
 
-import com.enterprise.edumentorapi.service.JWTService;
-import com.enterprise.edumentorapi.service.UserServiceImpl;
+import com.enterprise.edumentorapi.service.auth.JWTService;
+import com.enterprise.edumentorapi.service.user.UserServiceImpl;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

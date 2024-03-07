@@ -2,7 +2,7 @@ package com.enterprise.edumentorapi.security;
 
 import static org.springframework.security.config.http.SessionCreationPolicy.STATELESS;
 
-import com.enterprise.edumentorapi.service.UserServiceImpl;
+import com.enterprise.edumentorapi.service.user.UserServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

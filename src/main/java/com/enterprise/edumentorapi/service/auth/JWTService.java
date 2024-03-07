@@ -1,4 +1,4 @@
-package com.enterprise.edumentorapi.service;
+package com.enterprise.edumentorapi.service.auth;
 
 import org.springframework.security.core.userdetails.UserDetails;
 

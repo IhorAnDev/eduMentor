@@ -1,9 +1,9 @@
-package com.enterprise.edumentorapi.controller;
+package com.enterprise.edumentorapi.controller.auth;
 
-import com.enterprise.edumentorapi.dao.request.SignInRequest;
-import com.enterprise.edumentorapi.dao.request.SignUpRequest;
-import com.enterprise.edumentorapi.dao.response.JwtAuthenticationResponse;
-import com.enterprise.edumentorapi.service.AuthenticationService;
+import com.enterprise.edumentorapi.payload.request.auth.SignInRequest;
+import com.enterprise.edumentorapi.payload.request.auth.SignUpRequest;
+import com.enterprise.edumentorapi.payload.response.auth.JwtAuthenticationResponse;
+import com.enterprise.edumentorapi.service.auth.AuthenticationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;

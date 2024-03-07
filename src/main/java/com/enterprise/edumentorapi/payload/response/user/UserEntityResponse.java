@@ -1,17 +1,17 @@
-package com.enterprise.edumentorapi.dao.request;
+package com.enterprise.edumentorapi.payload.response.user;
 
+import jdk.jshell.Snippet;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class SignUpRequest {
+public class UserEntityResponse {
+    private Long id;
     private String firstName;
     private String lastName;
     private String email;
-    private String password;
+
 }

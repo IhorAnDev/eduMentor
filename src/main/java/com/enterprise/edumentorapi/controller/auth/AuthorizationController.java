@@ -1,4 +1,4 @@
-package com.enterprise.edumentorapi.controller;
+package com.enterprise.edumentorapi.controller.auth;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

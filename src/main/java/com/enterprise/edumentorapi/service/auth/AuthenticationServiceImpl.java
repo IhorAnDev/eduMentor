@@ -1,8 +1,8 @@
-package com.enterprise.edumentorapi.service;
+package com.enterprise.edumentorapi.service.auth;
 
-import com.enterprise.edumentorapi.dao.request.SignInRequest;
-import com.enterprise.edumentorapi.dao.request.SignUpRequest;
-import com.enterprise.edumentorapi.dao.response.JwtAuthenticationResponse;
+import com.enterprise.edumentorapi.payload.request.auth.SignInRequest;
+import com.enterprise.edumentorapi.payload.request.auth.SignUpRequest;
+import com.enterprise.edumentorapi.payload.response.auth.JwtAuthenticationResponse;
 import com.enterprise.edumentorapi.entity.User;
 import com.enterprise.edumentorapi.enums.UserRole;
 import com.enterprise.edumentorapi.repository.UserRepository;
