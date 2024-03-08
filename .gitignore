@@ -36,3 +36,8 @@ build/
 /src/main/resources/application.yml
 /src/main/resources/profiler.log
 /src/main/resources/profiler.log.*
+
+### Mac_files ###
+.DS_Store
+src/.DS_Store
+src/main/.DS_Store
