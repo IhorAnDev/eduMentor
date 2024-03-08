@@ -1,7 +1,6 @@
 package com.enterprise.edumentorapi.security;
 
 import com.enterprise.edumentorapi.entity.User;
-import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.core.GrantedAuthority;
@@ -19,6 +18,10 @@ public record PersonDetails(User user) implements UserDetails {
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of(new SimpleGrantedAuthority(user.getUserRole().name()));
+    }
+
+    public User getUser() {
+        return user;
     }
 
     @Override
