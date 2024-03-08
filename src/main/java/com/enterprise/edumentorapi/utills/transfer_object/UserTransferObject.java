@@ -10,7 +10,6 @@ import java.util.List;
 public class UserTransferObject {
 
     public UserEntityResponse toUserEntityResponse(User user) {
-
         return new UserEntityResponse(
                 user.getUserId(),
                 user.getFirstName(),

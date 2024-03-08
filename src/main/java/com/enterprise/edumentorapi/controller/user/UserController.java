@@ -6,6 +6,7 @@ import com.enterprise.edumentorapi.service.user.UserService;
 import com.enterprise.edumentorapi.utills.transfer_object.UserTransferObject;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -21,5 +22,10 @@ public class UserController {
     @RequestMapping("/all")
     public ResponseEntity<List<UserEntityResponse>> getAllUsers() {
         return ResponseEntity.ok(userTransferObject.toUserEntityResponseList(userService.getAllUsers()));
+    }
+
+    @RequestMapping("/{id}")
+    public ResponseEntity<UserEntityResponse> getUserById(@PathVariable Long id) {
+        return ResponseEntity.ok(userTransferObject.toUserEntityResponse(userService.getUserById(id)));
     }
 }
