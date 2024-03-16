@@ -2,7 +2,10 @@ package com.enterprise.edumentorapi.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
+import java.util.Date;
 import java.util.Set;
 
 @Entity
@@ -21,6 +24,22 @@ public class Company {
 
     @Column(name = "company_name")
     private String companyName;
+
+    @Column(name = "description")
+    private String description;
+
+    @CreationTimestamp
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "created_at")
+    private Date cratedAt;
+
+    @UpdateTimestamp
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "updated_at")
+    private Date updatedAt;
+
+    @Column(name = "enabled")
+    private Boolean isEnabled;
 
     @OneToMany(mappedBy = "offeringCompany", cascade = CascadeType.ALL)
     private Set<Course> courses;
