@@ -19,8 +19,8 @@ public class AppConfig {
     public OpenAPI openAPI() {
         return new OpenAPI().addSecurityItem(new SecurityRequirement().addList("Bearer Authentication"))
                 .components(new Components().addSecuritySchemes("Bearer Authentication", createAPIKeyScheme()))
-                .info(new Info().title("ProFiler API")
-                        .description("API for profiler")
+                .info(new Info().title("EduMentor API")
+                        .description("API for EduMentor")
                         .version("1.0").contact(new Contact().name("Antonov Ihor").email("www.eduMentor.com").url("ihorandev@gmail.com"))
                         .license(new License().name("License of API")
                                 .url("API license URL")));

@@ -45,10 +45,10 @@ public class Company {
     private Set<Course> courses;
 
     @OneToMany(mappedBy = "company", cascade = CascadeType.ALL)
-    private Set<CompanyStudent> students;
+    private Set<CompanyStudent> companyStudents;
 
     @OneToOne
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name ="owner_id")
     private User owner;
 
 
