@@ -3,6 +3,7 @@ package com.enterprise.edumentorapi.controller.company;
 import com.enterprise.edumentorapi.entity.Company;
 import com.enterprise.edumentorapi.entity.User;
 import com.enterprise.edumentorapi.payload.request.company.CompanyRequest;
+import com.enterprise.edumentorapi.payload.request.company.StudentAssignRequest;
 import com.enterprise.edumentorapi.payload.response.company.CompanyEntityResponse;
 import com.enterprise.edumentorapi.security.PersonDetails;
 import com.enterprise.edumentorapi.service.company.CompanyService;
@@ -12,12 +13,10 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/company")
@@ -38,5 +37,24 @@ public class CompanyController {
             return ResponseEntity.ok(companyTransferObject.fromCompany(company));
         }
         return ResponseEntity.badRequest().build();
+    }
+
+    @GetMapping("/all")
+    public ResponseEntity<List<CompanyEntityResponse>> getAllCompanies() {
+        List<Company> companies = companyService.getAllCompanies();
+
+        return ResponseEntity.ok(companies.stream().map(companyTransferObject::fromCompany).toList());
+    }
+
+    @GetMapping("/{companyId}")
+    public ResponseEntity<CompanyEntityResponse> getCompanyById(@PathVariable Long companyId) {
+        Company company = companyService.getCompanyWithStudentsById(companyId);
+        return ResponseEntity.ok(companyTransferObject.fromCompany(company));
+    }
+
+    @PostMapping("/assign")
+    public ResponseEntity<Void> assignUserToCompany(@RequestBody StudentAssignRequest request) {
+        companyService.assignUserToCompany(request.getCompanyId(), request.getUserId());
+        return ResponseEntity.ok().build();
     }
 }
