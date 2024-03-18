@@ -34,8 +34,8 @@ build/
 
 ### Yaml ###
 /src/main/resources/application.yml
-/src/main/resources/eduMentor.log
-/src/main/resources/eduMentor.log.*
+/src/main/resources/edumentor.log
+/src/main/resources/edumentor.log.*
 
 ### Mac_files ###
 .DS_Store
