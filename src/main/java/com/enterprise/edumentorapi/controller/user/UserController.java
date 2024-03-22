@@ -1,6 +1,7 @@
 package com.enterprise.edumentorapi.controller.user;
 
 import com.enterprise.edumentorapi.entity.User;
+import com.enterprise.edumentorapi.payload.request.user.UserUpdateRequest;
 import com.enterprise.edumentorapi.payload.response.user.UserEntityResponse;
 import com.enterprise.edumentorapi.security.PersonDetails;
 import com.enterprise.edumentorapi.service.user.UserService;
@@ -9,10 +10,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 import java.util.List;
@@ -40,5 +38,16 @@ public class UserController {
         Object principal = authentication.getPrincipal();
         User user = ((PersonDetails) principal).getUser();
         return ResponseEntity.ok(userTransferObject.toUserEntityResponse(user));
+    }
+
+    @PutMapping("/update/{id}")
+    public ResponseEntity<UserEntityResponse> updateUser(@PathVariable Long id, @RequestBody UserUpdateRequest updateRequest) {
+        return ResponseEntity.ok(userTransferObject.toUserEntityResponse(userService.updateUser(updateRequest, id)));
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<String> deleteUser(@PathVariable Long id) {
+        userService.deleteUser(id);
+        return ResponseEntity.ok("User with id " + id + " deleted successfully");
     }
 }

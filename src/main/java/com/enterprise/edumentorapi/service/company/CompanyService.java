@@ -6,7 +6,7 @@ import com.enterprise.edumentorapi.entity.User;
 import java.util.List;
 
 public interface CompanyService{
-    Company createCompany(Company company);
+    void createCompany(Company company);
 
     void assignUserToCompany(Long companyId,Long userId);
 

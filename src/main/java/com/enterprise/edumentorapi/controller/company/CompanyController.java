@@ -2,6 +2,7 @@ package com.enterprise.edumentorapi.controller.company;
 
 import com.enterprise.edumentorapi.entity.Company;
 import com.enterprise.edumentorapi.entity.User;
+import com.enterprise.edumentorapi.enums.UserRole;
 import com.enterprise.edumentorapi.payload.request.company.CompanyRequest;
 import com.enterprise.edumentorapi.payload.request.company.StudentAssignRequest;
 import com.enterprise.edumentorapi.payload.response.company.CompanyEntityResponse;
@@ -12,10 +13,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
-import java.security.Principal;
 import java.util.List;
 
 @RestController
@@ -26,15 +25,16 @@ public class CompanyController {
     private final CompanyService companyService;
 
     @PostMapping("/create")
-    public ResponseEntity<CompanyEntityResponse> createCompany(@RequestBody CompanyRequest request) {
+    public ResponseEntity<Void> createCompany(@RequestBody CompanyRequest request) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         Object principal = authentication.getPrincipal();
 
         if (principal instanceof PersonDetails) {
             User user = ((PersonDetails) principal).getUser();
+            user.setUserRole(UserRole.ADMIN);
             Company company = companyTransferObject.fromRequestCompany(request, user);
             companyService.createCompany(company);
-            return ResponseEntity.ok(companyTransferObject.fromCompany(company));
+            return ResponseEntity.ok().build();
         }
         return ResponseEntity.badRequest().build();
     }

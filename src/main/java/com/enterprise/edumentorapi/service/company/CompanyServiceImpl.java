@@ -18,9 +18,10 @@ public class CompanyServiceImpl implements CompanyService {
     private final CompanyRepository companyRepository;
 
     @Override
-    public Company createCompany(Company company) {
+    public void createCompany(Company company) {
+        User owner = company.getOwner();
+        userRepository.save(owner);
         companyRepository.save(company);
-        return company;
     }
 
     @Override
@@ -37,7 +38,7 @@ public class CompanyServiceImpl implements CompanyService {
 
     @Override
     public Company getCompanyWithStudentsById(Long id) {
-        return companyRepository.findById(id)
+        return companyRepository.findCompanyWithStudentsById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Company not found with id: " + id));
     }
 

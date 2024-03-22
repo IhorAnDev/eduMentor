@@ -3,6 +3,8 @@ package com.enterprise.edumentorapi.entity;
 import com.enterprise.edumentorapi.enums.UserRole;
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import java.util.Date;
 import java.util.Set;
@@ -34,9 +36,13 @@ public class User {
     @Column(name = "password", nullable = false)
     private String password;
 
+    @CreationTimestamp
+    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "created_at")
     private Date createdAt = new Date();
 
+    @UpdateTimestamp
+    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "updated_at")
     private Date updatedAt;
 
@@ -47,8 +53,7 @@ public class User {
     @Enumerated(EnumType.STRING)
     private UserRole userRole;
 
-    @OneToOne
-    @JoinColumn(name = "company_id")
+    @OneToOne(mappedBy = "owner", cascade = CascadeType.ALL)
     private Company ownedCompany;
 
     @ManyToMany(mappedBy = "invitedStudents",
