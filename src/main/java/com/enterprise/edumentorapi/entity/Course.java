@@ -2,7 +2,10 @@ package com.enterprise.edumentorapi.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
+import java.util.Date;
 import java.util.Set;
 
 @Entity
@@ -18,6 +21,25 @@ public class Course {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "course_id", nullable = false)
     private Long courseId;
+
+    @Column(name = "name")
+    private String courseName;
+
+    @Column(name = "description")
+    private String courseDescription;
+
+    @CreationTimestamp
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "created_at")
+    private Date cratedAt;
+
+    @UpdateTimestamp
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "updated_at")
+    private Date updatedAt;
+
+    @Column(name = "enabled")
+    private Boolean isEnabled;
 
     @ManyToOne
     @JoinColumn(name = "company_id")
