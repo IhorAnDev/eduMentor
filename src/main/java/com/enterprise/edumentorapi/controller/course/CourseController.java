@@ -22,7 +22,6 @@ import java.util.Set;
 public class CourseController {
     private final CourseService courseService;
     private final UserService userService;
-    private final CompanyService companyService;
     private final CourseTransferObject courseTransferObject;
 
     @PostMapping("/create")

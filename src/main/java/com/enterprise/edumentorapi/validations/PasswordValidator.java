@@ -12,9 +12,19 @@ public class PasswordValidator implements ConstraintValidator<PasswordMatches, O
         ConstraintValidator.super.initialize(constraintAnnotation);
     }
 
+
     @Override
-    public boolean isValid(Object object, ConstraintValidatorContext constraintValidatorContext) {
+    public boolean isValid(Object object, ConstraintValidatorContext context) {
         SignUpRequest userSignUpRequest = (SignUpRequest) object;
-        return userSignUpRequest.getPassword().equals(userSignUpRequest.getConfirmPassword());
+
+        if (!userSignUpRequest.getPassword().equals(userSignUpRequest.getConfirmPassword())) {
+            context.disableDefaultConstraintViolation();
+            context.buildConstraintViolationWithTemplate("Passwords do not match")
+                    .addPropertyNode("confirmPassword")
+                    .addConstraintViolation();
+            return false;
+        }
+        return true;
     }
+
 }

@@ -1,6 +1,7 @@
 package com.enterprise.edumentorapi.service.user;
 
 import com.enterprise.edumentorapi.entity.User;
+import com.enterprise.edumentorapi.payload.request.auth.SignUpRequest;
 import com.enterprise.edumentorapi.payload.request.user.UserUpdateRequest;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
@@ -9,7 +10,7 @@ import java.util.Set;
 
 public interface UserService extends UserDetailsService {
 
-    User saveUser(User user);
+    User createUser(SignUpRequest signUpRequest);
 
     List<User> getAllUsers();
 

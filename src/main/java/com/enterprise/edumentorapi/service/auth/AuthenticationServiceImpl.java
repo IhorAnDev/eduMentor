@@ -7,6 +7,7 @@ import com.enterprise.edumentorapi.entity.User;
 import com.enterprise.edumentorapi.enums.UserRole;
 import com.enterprise.edumentorapi.repository.UserRepository;
 import com.enterprise.edumentorapi.security.PersonDetails;
+import com.enterprise.edumentorapi.service.user.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -17,16 +18,13 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class AuthenticationServiceImpl implements AuthenticationService {
     private final UserRepository userRepository;
-    private final PasswordEncoder passwordEncoder;
     private final JWTService jwtService;
     private final AuthenticationManager authenticationManager;
+    private final UserService userService;
 
     @Override
     public JwtAuthenticationResponse signup(SignUpRequest request) {
-        var user = User.builder().firstName(request.getFirstName()).lastName(request.getLastName())
-                .email(request.getEmail()).password(passwordEncoder.encode(request.getPassword()))
-                .userRole(UserRole.STUDENT).build();
-        userRepository.save(user);
+        var user = userService.createUser(request);
         PersonDetails personDetails = new PersonDetails(user);
         var jwt = jwtService.generateToken(personDetails);
         return JwtAuthenticationResponse.builder().token(jwt).build();
