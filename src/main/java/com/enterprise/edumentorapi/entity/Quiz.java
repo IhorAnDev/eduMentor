@@ -1,11 +1,15 @@
 package com.enterprise.edumentorapi.entity;
 
 import jakarta.persistence.*;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.Set;
 
 @Entity
 @Table(name = "quiz")
+@Data
+@NoArgsConstructor
 public class Quiz {
 
     @Id

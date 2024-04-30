@@ -4,7 +4,7 @@ import com.enterprise.edumentorapi.entity.Lesson;
 import com.enterprise.edumentorapi.payload.request.lesson.LessonRequest;
 import com.enterprise.edumentorapi.payload.response.lesson.LessonEntityResponse;
 import com.enterprise.edumentorapi.service.lesson.LessonService;
-import com.enterprise.edumentorapi.utills.transfer_object.LessonResponseMapper;
+import com.enterprise.edumentorapi.utills.transfer_object.response_mapper.LessonResponseMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

@@ -5,7 +5,8 @@ import com.enterprise.edumentorapi.entity.Lesson;
 import com.enterprise.edumentorapi.payload.request.lesson.LessonRequest;
 import com.enterprise.edumentorapi.repository.LessonRepository;
 import com.enterprise.edumentorapi.service.course.CourseService;
-import com.enterprise.edumentorapi.utills.transfer_object.LessonMapper;
+import com.enterprise.edumentorapi.utills.transfer_object.entity_mapper.LessonMapper;
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -25,5 +26,11 @@ public class LessonServiceImpl implements LessonService {
         Lesson lesson = lessonMapper.fromRequest(lessonRequest);
         lesson.setCourse(course);
         return lessonRepository.save(lesson);
+    }
+
+    @Override
+    public Lesson getLessonById(Long lessonId) {
+        return lessonRepository.findById(lessonId)
+                .orElseThrow(() -> new EntityNotFoundException("Lesson not found with id: " + lessonId));
     }
 }

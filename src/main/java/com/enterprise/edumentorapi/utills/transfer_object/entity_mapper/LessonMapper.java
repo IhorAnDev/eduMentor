@@ -1,4 +1,4 @@
-package com.enterprise.edumentorapi.utills.transfer_object;
+package com.enterprise.edumentorapi.utills.transfer_object.entity_mapper;
 
 import com.enterprise.edumentorapi.entity.Lesson;
 import com.enterprise.edumentorapi.payload.request.lesson.LessonRequest;
