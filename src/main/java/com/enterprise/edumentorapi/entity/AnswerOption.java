@@ -1,7 +1,11 @@
 package com.enterprise.edumentorapi.entity;
 
 import jakarta.persistence.*;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+@Data
+@NoArgsConstructor
 @Entity
 @Table(name = "answer_option")
 public class AnswerOption {

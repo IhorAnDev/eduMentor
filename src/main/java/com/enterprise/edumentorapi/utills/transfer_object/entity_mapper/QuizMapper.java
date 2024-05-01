@@ -1,8 +1,10 @@
 package com.enterprise.edumentorapi.utills.transfer_object.entity_mapper;
 
+import com.enterprise.edumentorapi.entity.AnswerOption;
 import com.enterprise.edumentorapi.entity.Question;
 import com.enterprise.edumentorapi.entity.Quiz;
 import com.enterprise.edumentorapi.payload.request.qiuz.AddQuestionRequest;
+import com.enterprise.edumentorapi.payload.request.qiuz.AnswerOptionRequest;
 import com.enterprise.edumentorapi.payload.request.qiuz.QuizRequest;
 import org.springframework.stereotype.Component;
 
@@ -19,5 +21,13 @@ public class QuizMapper {
         question.setText(questionRequest.getText());
         question.setQuiz(quiz);
         return question;
+    }
+
+    public AnswerOption toAnswerOptionEntity(Question question, AnswerOptionRequest answerOptionRequest) {
+        AnswerOption answerOption = new AnswerOption();
+        answerOption.setText(answerOptionRequest.getText());
+        answerOption.setIsCorrect(answerOptionRequest.isCorrect());
+        answerOption.setQuestion(question);
+        return answerOption;
     }
 }
