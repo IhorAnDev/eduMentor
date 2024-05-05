@@ -1,12 +1,12 @@
 package com.enterprise.edumentorapi.utills.transfer_object.entity_mapper;
 
-import com.enterprise.edumentorapi.entity.AnswerOption;
-import com.enterprise.edumentorapi.entity.Question;
-import com.enterprise.edumentorapi.entity.Quiz;
-import com.enterprise.edumentorapi.payload.request.qiuz.AddQuestionRequest;
-import com.enterprise.edumentorapi.payload.request.qiuz.AnswerOptionRequest;
-import com.enterprise.edumentorapi.payload.request.qiuz.QuizRequest;
+import com.enterprise.edumentorapi.entity.*;
+import com.enterprise.edumentorapi.payload.request.qiuz.*;
 import org.springframework.stereotype.Component;
+
+import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Set;
 
 @Component
 public class QuizMapper {
@@ -29,5 +29,22 @@ public class QuizMapper {
         answerOption.setIsCorrect(answerOptionRequest.isCorrect());
         answerOption.setQuestion(question);
         return answerOption;
+    }
+
+    public QuizSubmission toQuizSubmissionEntity(Quiz quiz, Set<Answer> answers, User user) {
+        QuizSubmission quizSubmission = new QuizSubmission();
+        quizSubmission.setQuiz(quiz);
+        quizSubmission.setUser(user);
+        quizSubmission.setCompletedAt(LocalDateTime.now());
+        quizSubmission.setAnswers(answers);
+        return quizSubmission;
+    }
+
+    public Answer toAnswerEntity(Question question, AnswerOption answerOption, QuizSubmission quizSubmission) {
+        Answer answer = new Answer();
+        answer.setChosenOption(answerOption);
+        answer.setQuestion(question);
+        answer.setSubmission(quizSubmission);
+        return answer;
     }
 }

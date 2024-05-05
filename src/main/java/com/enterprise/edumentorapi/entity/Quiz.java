@@ -1,15 +1,19 @@
 package com.enterprise.edumentorapi.entity;
 
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import org.apache.commons.lang3.builder.EqualsExclude;
+import org.apache.commons.lang3.builder.HashCodeExclude;
 
 import java.util.Set;
 
 @Entity
 @Table(name = "quiz")
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
+@EqualsAndHashCode(exclude = {"questions"})
+@ToString(exclude = {"questions"})
 public class Quiz {
 
     @Id

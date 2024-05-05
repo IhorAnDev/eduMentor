@@ -2,7 +2,9 @@ package com.enterprise.edumentorapi.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import java.util.Set;
 
@@ -10,6 +12,7 @@ import java.util.Set;
 @NoArgsConstructor
 @Entity
 @Table(name = "question")
+@EqualsAndHashCode(exclude = {"answerOptions", "quiz"})
 public class Question {
 
     @Id
@@ -25,5 +28,7 @@ public class Question {
     private Quiz quiz;
 
     @OneToMany(mappedBy = "question", cascade = CascadeType.ALL)
+    @ToString.Exclude
     private Set<AnswerOption> answerOptions;
 }
+

@@ -2,12 +2,15 @@ package com.enterprise.edumentorapi.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Data
 @NoArgsConstructor
 @Entity
 @Table(name = "answer_option")
+@EqualsAndHashCode(exclude = {"question"})
 public class AnswerOption {
 
     @Id
@@ -23,5 +26,7 @@ public class AnswerOption {
 
     @ManyToOne
     @JoinColumn(name = "question_id")
+    @ToString.Exclude
     private Question question;
 }
+
