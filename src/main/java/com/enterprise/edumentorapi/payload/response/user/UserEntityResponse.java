@@ -13,5 +13,8 @@ public class UserEntityResponse {
     private String firstName;
     private String lastName;
     private String email;
+    private String token;
+    private String refreshToken;
+    private String role;
 
 }
