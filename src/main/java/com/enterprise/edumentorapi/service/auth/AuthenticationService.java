@@ -3,9 +3,11 @@ package com.enterprise.edumentorapi.service.auth;
 import com.enterprise.edumentorapi.payload.request.auth.SignInRequest;
 import com.enterprise.edumentorapi.payload.request.auth.SignUpRequest;
 import com.enterprise.edumentorapi.payload.response.auth.JwtAuthenticationResponse;
+import com.enterprise.edumentorapi.payload.response.user.UserEntityResponse;
+import com.enterprise.edumentorapi.utills.transfer_object.response_mapper.UserResponseMapper;
 
 public interface AuthenticationService {
-    JwtAuthenticationResponse signup(SignUpRequest request);
+    UserEntityResponse signup(SignUpRequest request);
 
-    JwtAuthenticationResponse signIn(SignInRequest request);
+    UserEntityResponse signIn(SignInRequest request);
 }

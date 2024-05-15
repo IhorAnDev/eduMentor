@@ -1,4 +1,4 @@
-package com.enterprise.edumentorapi.payload.response.utill;
+package com.enterprise.edumentorapi.utills;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

@@ -11,11 +11,10 @@ import java.util.Set;
 
 @Entity
 @ToString
-@Builder
-@Getter
-@Setter
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 @Table(name = "user")
 public class User {
 

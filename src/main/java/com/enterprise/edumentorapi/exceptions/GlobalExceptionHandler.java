@@ -1,6 +1,6 @@
 package com.enterprise.edumentorapi.exceptions;
 
-import com.enterprise.edumentorapi.payload.response.utill.ErrorResponse;
+import com.enterprise.edumentorapi.utills.ErrorResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.MessageSource;

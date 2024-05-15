@@ -1,6 +1,5 @@
 package com.enterprise.edumentorapi.payload.response.user;
 
-import jdk.jshell.Snippet;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -14,7 +13,6 @@ public class UserEntityResponse {
     private String lastName;
     private String email;
     private String token;
-    private String refreshToken;
     private String role;
 
 }
