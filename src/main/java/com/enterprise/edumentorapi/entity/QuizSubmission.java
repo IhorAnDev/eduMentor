@@ -11,11 +11,11 @@ import java.util.Objects;
 import java.util.Set;
 
 @Entity
-@Table(name = "quiz_submission")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(exclude = {"user", "quiz", "answers"})
+@Table(name = "quiz_submission")
 public class QuizSubmission {
 
     @Id

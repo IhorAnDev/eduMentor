@@ -8,12 +8,12 @@ import org.apache.commons.lang3.builder.HashCodeExclude;
 import java.util.Set;
 
 @Entity
-@Table(name = "quiz")
 @Getter
 @Setter
 @NoArgsConstructor
 @EqualsAndHashCode(exclude = {"questions"})
 @ToString(exclude = {"questions"})
+@Table(name = "quiz")
 public class Quiz {
 
     @Id

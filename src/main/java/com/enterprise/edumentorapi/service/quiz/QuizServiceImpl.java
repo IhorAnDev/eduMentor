@@ -39,7 +39,6 @@ public class QuizServiceImpl implements QuizService {
     private final QuestionRepository questionRepository;
     private final AnswerOptionRepository answerOptionRepository;
     private final QuizSubmissionRepository quizSubmissionRepository;
-    private final AnswerRepository answerRepository;
 
     @Override
     public void createQuiz(QuizRequest quizRequest, Long lessonId) {
