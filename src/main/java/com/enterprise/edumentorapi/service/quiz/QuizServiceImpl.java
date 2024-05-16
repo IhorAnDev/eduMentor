@@ -39,7 +39,6 @@ public class QuizServiceImpl implements QuizService {
     private final QuestionRepository questionRepository;
     private final AnswerOptionRepository answerOptionRepository;
     private final QuizSubmissionRepository quizSubmissionRepository;
-    private final AnswerRepository answerRepository;
 
     @Override
     public void createQuiz(QuizRequest quizRequest, Long lessonId) {
@@ -109,7 +108,7 @@ public class QuizServiceImpl implements QuizService {
 
     @Override
     public List<AnswerDetail> getAnswerDetails(Long quizSubmissionId) {
-        QuizSubmission submission = quizSubmissionRepository.findById(quizSubmissionId)
+        QuizSubmission submission = quizSubmissionRepository.findDetailedById(quizSubmissionId)
                 .orElseThrow(() -> new EntityNotFoundException("Quiz submission not found"));
 
         List<AnswerDetail> details = new ArrayList<>();
