@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class UserResponseMapper {
 
-    public UserEntityResponse toUserResponse(User user, String token) {
+    public UserEntityResponse toUserResponse(User user, String token, String refreshToken) {
         UserEntityResponse response = new UserEntityResponse();
         response.setId(user.getUserId());
         response.setFirstName(user.getFirstName());
@@ -15,6 +15,7 @@ public class UserResponseMapper {
         response.setEmail(user.getEmail());
         response.setRole(user.getUserRole().name());
         response.setToken(token);
+        response.setRefreshToken(refreshToken);
         return response;
 
     }

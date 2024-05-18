@@ -1,19 +1,19 @@
 package com.enterprise.edumentorapi.service.auth;
 
+import com.enterprise.edumentorapi.entity.User;
 import com.enterprise.edumentorapi.payload.request.auth.SignInRequest;
 import com.enterprise.edumentorapi.payload.request.auth.SignUpRequest;
-import com.enterprise.edumentorapi.payload.response.auth.JwtAuthenticationResponse;
-import com.enterprise.edumentorapi.entity.User;
-import com.enterprise.edumentorapi.enums.UserRole;
+import com.enterprise.edumentorapi.payload.request.auth.TokenRefreshRequest;
 import com.enterprise.edumentorapi.payload.response.user.UserEntityResponse;
 import com.enterprise.edumentorapi.repository.UserRepository;
 import com.enterprise.edumentorapi.security.PersonDetails;
 import com.enterprise.edumentorapi.service.user.UserService;
 import com.enterprise.edumentorapi.utills.transfer_object.response_mapper.UserResponseMapper;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -30,7 +30,8 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         var user = userService.createUser(request);
         PersonDetails personDetails = new PersonDetails(user);
         var jwt = jwtService.generateToken(personDetails);
-        return userResponseMapper.toUserResponse(user, jwt);
+        var refreshToken = jwtService.generateRefreshToken(personDetails);
+        return userResponseMapper.toUserResponse(user, jwt, refreshToken);
     }
 
     @Override
@@ -42,7 +43,14 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
         PersonDetails personDetails = new PersonDetails(user);
         var jwt = jwtService.generateToken(personDetails);
+        var refreshToken = jwtService.generateRefreshToken(personDetails);
 
-        return userResponseMapper.toUserResponse(user, jwt);
+        return userResponseMapper.toUserResponse(user, jwt, refreshToken);
     }
+
+    @Override
+    public UserEntityResponse refreshToken(User user, String accessToken, String refreshToken) {
+        return userResponseMapper.toUserResponse(user, accessToken, refreshToken);
+    }
+
 }

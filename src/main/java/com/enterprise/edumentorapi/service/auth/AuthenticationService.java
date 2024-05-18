@@ -1,5 +1,6 @@
 package com.enterprise.edumentorapi.service.auth;
 
+import com.enterprise.edumentorapi.entity.User;
 import com.enterprise.edumentorapi.payload.request.auth.SignInRequest;
 import com.enterprise.edumentorapi.payload.request.auth.SignUpRequest;
 import com.enterprise.edumentorapi.payload.response.auth.JwtAuthenticationResponse;
@@ -10,4 +11,6 @@ public interface AuthenticationService {
     UserEntityResponse signup(SignUpRequest request);
 
     UserEntityResponse signIn(SignInRequest request);
+
+    UserEntityResponse refreshToken(User user, String accessToken, String refreshToken);
 }
