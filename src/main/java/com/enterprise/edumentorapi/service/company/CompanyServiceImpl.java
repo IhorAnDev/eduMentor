@@ -3,9 +3,9 @@ package com.enterprise.edumentorapi.service.company;
 import com.enterprise.edumentorapi.entity.Company;
 import com.enterprise.edumentorapi.entity.CompanyStudent;
 import com.enterprise.edumentorapi.entity.User;
+import com.enterprise.edumentorapi.exceptions.EntityNotFoundException;
 import com.enterprise.edumentorapi.repository.CompanyRepository;
 import com.enterprise.edumentorapi.repository.UserRepository;
-import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

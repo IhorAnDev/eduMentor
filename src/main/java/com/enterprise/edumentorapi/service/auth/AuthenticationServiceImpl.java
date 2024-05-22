@@ -3,15 +3,14 @@ package com.enterprise.edumentorapi.service.auth;
 import com.enterprise.edumentorapi.entity.User;
 import com.enterprise.edumentorapi.payload.request.auth.SignInRequest;
 import com.enterprise.edumentorapi.payload.request.auth.SignUpRequest;
-import com.enterprise.edumentorapi.payload.request.auth.TokenRefreshRequest;
 import com.enterprise.edumentorapi.payload.response.user.UserEntityResponse;
 import com.enterprise.edumentorapi.repository.UserRepository;
 import com.enterprise.edumentorapi.security.PersonDetails;
+import com.enterprise.edumentorapi.service.company.CompanyService;
 import com.enterprise.edumentorapi.service.user.UserService;
 import com.enterprise.edumentorapi.utills.transfer_object.response_mapper.UserResponseMapper;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.stereotype.Service;
@@ -24,13 +23,16 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     private final AuthenticationManager authenticationManager;
     private final UserService userService;
     private final UserResponseMapper userResponseMapper;
+    private final CompanyService companyService;
 
     @Override
+    @Transactional
     public UserEntityResponse signup(SignUpRequest request) {
         var user = userService.createUser(request);
         PersonDetails personDetails = new PersonDetails(user);
         var jwt = jwtService.generateToken(personDetails);
         var refreshToken = jwtService.generateRefreshToken(personDetails);
+        companyService.assignUserToCompany(1L, user.getUserId());
         return userResponseMapper.toUserResponse(user, jwt, refreshToken);
     }
 

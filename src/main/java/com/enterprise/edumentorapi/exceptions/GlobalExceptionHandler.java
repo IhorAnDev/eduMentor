@@ -55,4 +55,10 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         return new ErrorResponse(400, "Duplicate Entity Error", ex.getMessage());
     }
 
+    @ExceptionHandler(EntityNotFoundException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    @ResponseBody
+    public ErrorResponse handleEntityNotFoundException(EntityNotFoundException ex) {
+        return new ErrorResponse(404, "Not Found", ex.getMessage());
+    }
 }
