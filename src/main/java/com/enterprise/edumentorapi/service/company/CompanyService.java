@@ -5,14 +5,16 @@ import com.enterprise.edumentorapi.entity.User;
 
 import java.util.List;
 
-public interface CompanyService{
+public interface CompanyService {
     void createCompany(Company company);
 
-    void assignUserToCompany(Long companyId,Long userId);
+    void assignUserToCompany(Long companyId, Long userId);
 
     List<Company> getAllCompanies();
 
     Company getCompanyWithStudentsById(Long id);
 
     Company getCompanyById(Long companyId);
+
+    Company getCompanyWithCoursesById(Long id);
 }

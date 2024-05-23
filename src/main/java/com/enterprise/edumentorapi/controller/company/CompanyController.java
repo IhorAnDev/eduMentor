@@ -48,7 +48,7 @@ public class CompanyController {
 
     @GetMapping("/{companyId}")
     public ResponseEntity<CompanyEntityResponse> getCompanyById(@PathVariable Long companyId) {
-        Company company = companyService.getCompanyWithStudentsById(companyId);
+        Company company = companyService.getCompanyWithCoursesById(companyId);
         return ResponseEntity.ok(companyTransferObject.fromCompany(company));
     }
 

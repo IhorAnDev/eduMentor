@@ -6,6 +6,7 @@ import com.enterprise.edumentorapi.entity.User;
 import com.enterprise.edumentorapi.exceptions.EntityNotFoundException;
 import com.enterprise.edumentorapi.repository.CompanyRepository;
 import com.enterprise.edumentorapi.repository.UserRepository;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +14,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
+@Transactional
 public class CompanyServiceImpl implements CompanyService {
     private final UserRepository userRepository;
     private final CompanyRepository companyRepository;
@@ -29,6 +31,12 @@ public class CompanyServiceImpl implements CompanyService {
         return companyRepository.findAll();
     }
 
+
+    @Override
+    public Company getCompanyWithCoursesById(Long id) {
+        return companyRepository.findCompanyWithCoursesById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Company not found with id: " + id));
+    }
 
     @Override
     public Company getCompanyById(Long companyId) {
