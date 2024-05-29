@@ -24,9 +24,14 @@ public interface QuizService {
 
     Question getQuestionById(Long questionId);
 
+    Question getQuestionWithAnswerOptionsById(Long questionId);
+
+
     QuizSubmission submitQuiz(Long quizId, QuizSubmissionRequest submissionRequest);
 
     AnswerOption getAnswerOptionById(Long answerOptionId);
 
     List<AnswerDetail> getAnswerDetails(Long quizSubmissionId);
+
+    List<Question> getQuestionsByQuizId(Long quizId);
 }

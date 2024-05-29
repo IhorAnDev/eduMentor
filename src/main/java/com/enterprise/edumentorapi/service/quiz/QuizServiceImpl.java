@@ -76,6 +76,11 @@ public class QuizServiceImpl implements QuizService {
                 .orElseThrow(() -> new EntityNotFoundException("Question not found with id: " + questionId));
     }
 
+    @Override
+    public Question getQuestionWithAnswerOptionsById(Long questionId) {
+        return questionRepository.findByIdWithAnswerOptions(questionId)
+                .orElseThrow(() -> new EntityNotFoundException("Question not found with id: " + questionId));
+    }
 
     @Override
     @Transactional
@@ -125,6 +130,14 @@ public class QuizServiceImpl implements QuizService {
         }
         return details;
     }
+
+    @Override
+    public List<Question> getQuestionsByQuizId(Long quizId) {
+        Quiz quiz = quizRepository.findByIdWithQuestions(quizId)
+                .orElseThrow(() -> new EntityNotFoundException("Quiz not found with id: " + quizId));
+        return quiz.getQuestions().stream().toList();
+    }
+
 
     private String getExplanationForAnswer(Answer answer) {
         // This could be static text, pulled from a database, or even calculated

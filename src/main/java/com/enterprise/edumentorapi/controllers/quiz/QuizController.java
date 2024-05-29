@@ -1,14 +1,12 @@
-package com.enterprise.edumentorapi.controller.Quiz;
+package com.enterprise.edumentorapi.controllers.quiz;
 
+import com.enterprise.edumentorapi.entity.Question;
 import com.enterprise.edumentorapi.entity.QuizSubmission;
 import com.enterprise.edumentorapi.payload.request.qiuz.AddQuestionRequest;
 import com.enterprise.edumentorapi.payload.request.qiuz.AnswerOptionRequest;
 import com.enterprise.edumentorapi.payload.request.qiuz.QuizRequest;
 import com.enterprise.edumentorapi.payload.request.qiuz.QuizSubmissionRequest;
-import com.enterprise.edumentorapi.payload.response.qiuz.AnswerDetail;
-import com.enterprise.edumentorapi.payload.response.qiuz.AnswerOptionResponse;
-import com.enterprise.edumentorapi.payload.response.qiuz.QuizSubmissionDetails;
-import com.enterprise.edumentorapi.payload.response.qiuz.QuizSubmissionResponse;
+import com.enterprise.edumentorapi.payload.response.qiuz.*;
 import com.enterprise.edumentorapi.service.quiz.QuizService;
 import com.enterprise.edumentorapi.utills.transfer_object.response_mapper.QuizResponseMapper;
 import lombok.RequiredArgsConstructor;
@@ -16,7 +14,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -37,6 +34,19 @@ public class QuizController {
     public ResponseEntity<?> createQuestion(@PathVariable Long quizId, @RequestBody AddQuestionRequest questionRequest) {
         quizService.createQuestion(quizId, questionRequest);
         return ResponseEntity.ok().build();
+    }
+
+    @GetMapping("/question/{questionId}")
+    public ResponseEntity<QuestionResponse> getQuestionById(@PathVariable Long questionId) {
+        Question question = quizService.getQuestionWithAnswerOptionsById(questionId);
+        return ResponseEntity.ok(quizResponseMapper.toQuestionResponse(question));
+    }
+
+    @GetMapping("/question/{quizId}/questions")
+    public ResponseEntity<List<QuestionResponse>> getQuestionsByQuizId(@PathVariable Long quizId) {
+        List<Question> questions = quizService.getQuestionsByQuizId(quizId);
+        List<QuestionResponse> questionResponses = questions.stream().map(quizResponseMapper::toQuestionResponse).toList();
+        return ResponseEntity.ok(questionResponses);
     }
 
     @PostMapping("/question/{questionId}/options")

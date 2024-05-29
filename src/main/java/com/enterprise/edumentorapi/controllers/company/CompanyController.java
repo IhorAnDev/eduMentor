@@ -1,4 +1,4 @@
-package com.enterprise.edumentorapi.controller.company;
+package com.enterprise.edumentorapi.controllers.company;
 
 import com.enterprise.edumentorapi.entity.Company;
 import com.enterprise.edumentorapi.entity.User;

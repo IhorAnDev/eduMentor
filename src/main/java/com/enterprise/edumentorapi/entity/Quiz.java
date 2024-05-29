@@ -25,6 +25,7 @@ public class Quiz {
     private String name;
 
     @OneToMany(mappedBy = "quiz", cascade = CascadeType.ALL)
+    @OrderBy("questionId ASC")
     private Set<Question> questions;
 }
 

@@ -1,4 +1,4 @@
-package com.enterprise.edumentorapi.controller.course;
+package com.enterprise.edumentorapi.controllers.course;
 
 import com.enterprise.edumentorapi.entity.User;
 import com.enterprise.edumentorapi.payload.request.course.AssignUsersCourseRequest;

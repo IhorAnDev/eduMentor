@@ -1,4 +1,4 @@
-package com.enterprise.edumentorapi.controller.auth;
+package com.enterprise.edumentorapi.controllers.auth;
 
 import com.enterprise.edumentorapi.entity.User;
 import com.enterprise.edumentorapi.payload.request.auth.SignInRequest;

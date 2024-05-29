@@ -1,4 +1,4 @@
-package com.enterprise.edumentorapi.controller.user;
+package com.enterprise.edumentorapi.controllers.user;
 
 import com.enterprise.edumentorapi.entity.User;
 import com.enterprise.edumentorapi.payload.request.user.UserUpdateRequest;

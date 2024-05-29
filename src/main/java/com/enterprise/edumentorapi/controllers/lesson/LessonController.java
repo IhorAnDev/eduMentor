@@ -1,4 +1,4 @@
-package com.enterprise.edumentorapi.controller.lesson;
+package com.enterprise.edumentorapi.controllers.lesson;
 
 import com.enterprise.edumentorapi.entity.Lesson;
 import com.enterprise.edumentorapi.payload.request.lesson.LessonRequest;
