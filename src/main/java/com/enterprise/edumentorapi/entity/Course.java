@@ -45,6 +45,9 @@ public class Course {
     @JoinColumn(name = "company_id")
     private Company offeringCompany;
 
+    @Column(name = "image_url")
+    private String imageUrl;
+
     @ManyToMany
     @JoinTable(
             name = "course_student",

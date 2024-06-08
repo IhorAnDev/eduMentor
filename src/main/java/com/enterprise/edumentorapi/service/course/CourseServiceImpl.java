@@ -3,6 +3,7 @@ package com.enterprise.edumentorapi.service.course;
 import com.enterprise.edumentorapi.entity.Company;
 import com.enterprise.edumentorapi.entity.Course;
 import com.enterprise.edumentorapi.entity.User;
+import com.enterprise.edumentorapi.payload.request.course.UpdateCourseRequest;
 import com.enterprise.edumentorapi.repository.CompanyRepository;
 import com.enterprise.edumentorapi.repository.CourseRepository;
 import jakarta.persistence.EntityNotFoundException;
@@ -23,6 +24,12 @@ public class CourseServiceImpl implements CourseService {
         Company company = companyRepository.findById(companyId)
                 .orElseThrow(() -> new EntityNotFoundException("Company not found with id: " + companyId));
         course.setOfferingCompany(company);
+        courseRepository.save(course);
+    }
+
+    @Override
+    public void addImageToCourse(Course course, String imageUrl) {
+        course.setImageUrl(imageUrl);
         courseRepository.save(course);
     }
 

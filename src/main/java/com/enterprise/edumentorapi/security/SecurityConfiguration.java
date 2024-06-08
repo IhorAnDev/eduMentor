@@ -34,6 +34,8 @@ public class SecurityConfiguration {
                         .permitAll()
                         .requestMatchers("/api-docs/**")
                         .permitAll()
+                        .requestMatchers("/api/v1/images/**")
+                        .permitAll() // Разрешить доступ без аутентификации
                         .anyRequest().authenticated())
                 .sessionManagement(manager -> manager.sessionCreationPolicy(STATELESS))
                 .authenticationProvider(authenticationProvider()).addFilterBefore(

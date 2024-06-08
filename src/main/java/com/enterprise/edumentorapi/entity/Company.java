@@ -42,6 +42,7 @@ public class Company {
     private Boolean isEnabled;
 
     @OneToMany(mappedBy = "offeringCompany", cascade = CascadeType.ALL)
+    @OrderBy("courseId ASC")
     private Set<Course> courses;
 
     @OneToMany(mappedBy = "company", cascade = CascadeType.ALL)

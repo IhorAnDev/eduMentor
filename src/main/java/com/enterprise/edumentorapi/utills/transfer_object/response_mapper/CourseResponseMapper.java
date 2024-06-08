@@ -12,6 +12,7 @@ public class CourseResponseMapper {
         response.setCourseId(course.getCourseId());
         response.setCourseName(course.getCourseName());
         response.setCourseDescription(course.getCourseDescription());
+        response.setImageUrl(course.getImageUrl());
         response.setIsEnabled(course.getIsEnabled());
         return response;
     }
