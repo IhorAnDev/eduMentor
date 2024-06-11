@@ -1,10 +1,7 @@
 package com.enterprise.edumentorapi.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.LocalDateTime;
 import java.util.Objects;
@@ -24,13 +21,16 @@ public class QuizSubmission {
 
     @ManyToOne
     @JoinColumn(name = "user_id")
+    @ToString.Exclude
     private User user;
 
     @ManyToOne
     @JoinColumn(name = "quiz_id")
+    @ToString.Exclude
     private Quiz quiz;
 
     @OneToMany(mappedBy = "submission", cascade = CascadeType.ALL)
+    @ToString.Exclude
     private Set<Answer> answers;
 
     @Column(name = "completed_at")

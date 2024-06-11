@@ -29,6 +29,7 @@ public class Question {
 
     @OneToMany(mappedBy = "question", cascade = CascadeType.ALL)
     @ToString.Exclude
+    @OrderBy("optionId ASC")
     private Set<AnswerOption> answerOptions;
 }
 

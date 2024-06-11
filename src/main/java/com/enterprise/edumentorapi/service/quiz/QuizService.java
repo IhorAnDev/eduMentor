@@ -10,6 +10,7 @@ import com.enterprise.edumentorapi.payload.request.qiuz.QuizRequest;
 import com.enterprise.edumentorapi.payload.request.qiuz.QuizSubmissionRequest;
 import com.enterprise.edumentorapi.payload.response.qiuz.AnswerDetail;
 import com.enterprise.edumentorapi.payload.response.qiuz.AnswerOptionResponse;
+import com.enterprise.edumentorapi.payload.response.qiuz.QuizSubmissionResult;
 
 import java.util.List;
 
@@ -34,4 +35,8 @@ public interface QuizService {
     List<AnswerDetail> getAnswerDetails(Long quizSubmissionId);
 
     List<Question> getQuestionsByQuizId(Long quizId);
+
+    QuizSubmission getQuizSubmissionById(Long quizSubmissionId);
+
+    QuizSubmissionResult getSubmissionResults(Long quizSubmissionId);
 }

@@ -1,18 +1,19 @@
 package com.enterprise.edumentorapi.service.quiz;
 
 import com.enterprise.edumentorapi.entity.*;
+import com.enterprise.edumentorapi.exceptions.EntityNotFoundException;
 import com.enterprise.edumentorapi.payload.request.qiuz.AddQuestionRequest;
 import com.enterprise.edumentorapi.payload.request.qiuz.AnswerOptionRequest;
 import com.enterprise.edumentorapi.payload.request.qiuz.QuizRequest;
 import com.enterprise.edumentorapi.payload.request.qiuz.QuizSubmissionRequest;
 import com.enterprise.edumentorapi.payload.response.qiuz.AnswerDetail;
 import com.enterprise.edumentorapi.payload.response.qiuz.AnswerOptionResponse;
+import com.enterprise.edumentorapi.payload.response.qiuz.QuizSubmissionResult;
 import com.enterprise.edumentorapi.repository.*;
 import com.enterprise.edumentorapi.security.PersonDetails;
 import com.enterprise.edumentorapi.service.lesson.LessonService;
 import com.enterprise.edumentorapi.utills.transfer_object.entity_mapper.QuizMapper;
 import com.enterprise.edumentorapi.utills.transfer_object.response_mapper.QuizResponseMapper;
-import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
@@ -28,6 +29,7 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
+@Transactional
 public class QuizServiceImpl implements QuizService {
 
     private final LessonService lessonService;
@@ -122,8 +124,6 @@ public class QuizServiceImpl implements QuizService {
             detail.setQuestionId(answer.getQuestion().getQuestionId());
             detail.setChosenOptionId(answer.getChosenOption().getOptionId());
             detail.setCorrect(answer.getChosenOption().getIsCorrect());
-
-            // Optionally, add an explanation
             detail.setExplanation(getExplanationForAnswer(answer));
 
             details.add(detail);
@@ -138,9 +138,44 @@ public class QuizServiceImpl implements QuizService {
         return quiz.getQuestions().stream().toList();
     }
 
+    @Override
+    public QuizSubmission getQuizSubmissionById(Long quizSubmissionId) {
+        return quizSubmissionRepository.findById(quizSubmissionId)
+                .orElseThrow(() -> new EntityNotFoundException("Quiz submission not found with id: " + quizSubmissionId));
+    }
+
+    @Override
+    public QuizSubmissionResult getSubmissionResults(Long quizSubmissionId) {
+        QuizSubmission submission = getQuizSubmissionById(quizSubmissionId);
+        int score = 0;
+        for (Answer answer : submission.getAnswers()) {
+            if (answer.getChosenOption().getIsCorrect()) {
+                score++;
+            }
+        }
+        double allPossibleScore = submission.getAnswers().size() * 100.0;
+        int currentScore = score * 100;
+        int percent = (int) Math.round((currentScore / allPossibleScore) * 100);
+
+        int numberOfQuestions = submission.getAnswers().size();
+        int passingPercentage = calculatePassingPercentage(numberOfQuestions);
+
+        boolean passed = percent >= passingPercentage;
+
+        return new QuizSubmissionResult(currentScore, percent, passed);
+    }
+
+    private int calculatePassingPercentage(int numberOfQuestions) {
+        if (numberOfQuestions >= 6) {
+            return 80;
+        } else {
+            return (int) Math.round((50.0 + (numberOfQuestions - 2) * 7.5));
+        }
+    }
+
+
 
     private String getExplanationForAnswer(Answer answer) {
-        // This could be static text, pulled from a database, or even calculated
         if (answer.getChosenOption().getIsCorrect()) {
             return "Correct answer!";
         } else {

@@ -14,7 +14,7 @@ public class QuizSubmissionResponse {
     private Long id;
     private Long userId;
     private Long quizId;
-    private QuizSubmissionDetails details;
+    private QuizSubmissionResult details;
     private List<AnswerDetail> answers;
 
 

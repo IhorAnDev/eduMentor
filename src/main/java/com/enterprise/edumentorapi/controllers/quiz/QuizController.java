@@ -64,12 +64,22 @@ public class QuizController {
         try {
             QuizSubmission quizSubmission = quizService.submitQuiz(quizId, submissionRequest);
             List<AnswerDetail> answerDetails = quizService.getAnswerDetails(quizSubmission.getId());
-            QuizSubmissionDetails submissionDetails = new QuizSubmissionDetails();
+            QuizSubmissionResult submissionResults = quizService.getSubmissionResults(quizSubmission.getId());
             QuizSubmissionResponse response = quizResponseMapper
-                    .toQuizSubmissionResponse(quizSubmission, answerDetails, submissionDetails);
+                    .toQuizSubmissionResponse(quizSubmission, answerDetails, submissionResults);
             return ResponseEntity.ok(response);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error submitting quiz: " + e.getMessage());
         }
+    }
+
+    @GetMapping("/submission/{quizSubmissionId}")
+    public ResponseEntity<QuizSubmissionResponse> getSubmissionById(@PathVariable Long quizSubmissionId) {
+        QuizSubmission quizSubmission = quizService.getQuizSubmissionById(quizSubmissionId);
+        List<AnswerDetail> answerDetails = quizService.getAnswerDetails(quizSubmissionId);
+        QuizSubmissionResult submissionDetails = quizService.getSubmissionResults(quizSubmissionId);
+        QuizSubmissionResponse response = quizResponseMapper
+                .toQuizSubmissionResponse(quizSubmission, answerDetails, submissionDetails);
+        return ResponseEntity.ok(response);
     }
 }

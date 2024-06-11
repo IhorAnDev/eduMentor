@@ -19,7 +19,7 @@ public class QuizResponseMapper {
 
     public QuizSubmissionResponse toQuizSubmissionResponse(QuizSubmission quizSubmission,
                                                            List<AnswerDetail> answerDetails,
-                                                           QuizSubmissionDetails submissionDetails) {
+                                                           QuizSubmissionResult submissionDetails) {
         QuizSubmissionResponse response = new QuizSubmissionResponse();
         response.setId(quizSubmission.getId());
         response.setUserId(quizSubmission.getUser().getUserId());
