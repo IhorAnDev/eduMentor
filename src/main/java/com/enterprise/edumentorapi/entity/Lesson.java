@@ -1,4 +1,5 @@
 package com.enterprise.edumentorapi.entity;
+
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -32,4 +33,14 @@ public class Lesson {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "quiz_id")
     private Quiz quiz;
+
+    @Column(name = "video_id")
+    private String videoId;
+
+    @Column(name = "video_url")
+    private String videoUrl;
+
+    @OneToOne
+    @JoinColumn(name = "hw_id", referencedColumnName = "hw_id")
+    private HomeWork homeWork;
 }

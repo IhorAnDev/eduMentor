@@ -11,6 +11,7 @@ import java.util.Set;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString(exclude = {"user", "quiz", "answers"})
 @EqualsAndHashCode(exclude = {"user", "quiz", "answers"})
 @Table(name = "quiz_submission")
 public class QuizSubmission {
@@ -21,16 +22,13 @@ public class QuizSubmission {
 
     @ManyToOne
     @JoinColumn(name = "user_id")
-    @ToString.Exclude
     private User user;
 
     @ManyToOne
     @JoinColumn(name = "quiz_id")
-    @ToString.Exclude
     private Quiz quiz;
 
     @OneToMany(mappedBy = "submission", cascade = CascadeType.ALL)
-    @ToString.Exclude
     private Set<Answer> answers;
 
     @Column(name = "completed_at")

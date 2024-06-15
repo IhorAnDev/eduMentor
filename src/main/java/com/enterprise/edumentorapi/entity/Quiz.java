@@ -2,8 +2,7 @@ package com.enterprise.edumentorapi.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
-import org.apache.commons.lang3.builder.EqualsExclude;
-import org.apache.commons.lang3.builder.HashCodeExclude;
+
 
 import java.util.Set;
 
