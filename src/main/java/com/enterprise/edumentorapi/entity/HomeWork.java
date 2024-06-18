@@ -27,10 +27,10 @@ public class HomeWork {
     @Column(name = "is_mandatory")
     private Boolean isMandatory;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="assignment_id")
     private AssignmentHw assignmentHw;
 
-    @OneToOne(mappedBy = "homeWork", cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "homeWork")
     private Lesson lesson;
 }

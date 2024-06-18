@@ -24,6 +24,9 @@ public class AssignmentHw {
     @Column(name = "assignment_task")
     private String assignmentTask;
 
+    @Column(name = "assigment_url")
+    private String assigmentUrl;
+
     @OneToOne(mappedBy = "assignmentHw", cascade = CascadeType.ALL)
     private HomeWork homeWork;
 

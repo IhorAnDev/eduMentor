@@ -2,11 +2,11 @@ package com.enterprise.edumentorapi.service.lesson;
 
 import com.enterprise.edumentorapi.entity.Course;
 import com.enterprise.edumentorapi.entity.Lesson;
+import com.enterprise.edumentorapi.exceptions.EntityNotFoundException;
 import com.enterprise.edumentorapi.payload.request.lesson.LessonRequest;
 import com.enterprise.edumentorapi.repository.LessonRepository;
 import com.enterprise.edumentorapi.service.course.CourseService;
 import com.enterprise.edumentorapi.utills.transfer_object.entity_mapper.LessonMapper;
-import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
