@@ -11,6 +11,8 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class LessonServiceImpl implements LessonService {
@@ -32,5 +34,11 @@ public class LessonServiceImpl implements LessonService {
     public Lesson getLessonById(Long lessonId) {
         return lessonRepository.findById(lessonId)
                 .orElseThrow(() -> new EntityNotFoundException("Lesson not found with id: " + lessonId));
+    }
+
+    @Override
+    public List<Lesson> getLessonsByCourseId(Long courseId) {
+        Course course = courseService.getCourseById(courseId);
+        return lessonRepository.getLessonByCourse(course);
     }
 }

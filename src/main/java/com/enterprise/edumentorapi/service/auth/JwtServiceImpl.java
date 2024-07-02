@@ -43,7 +43,7 @@ public class JwtServiceImpl implements JWTService {
     private String generateToken(Map<String, Object> extraClaims, UserDetails userDetails) {
         return Jwts.builder().setClaims(extraClaims).setSubject(userDetails.getUsername())
                 .setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 24 * 7))
+                .setExpiration(Date.from(Instant.now().plus(1, ChronoUnit.HOURS)))
                 .signWith(getSigningKey(), SignatureAlgorithm.HS256).compact();
     }
 
@@ -51,6 +51,7 @@ public class JwtServiceImpl implements JWTService {
     private boolean isTokenExpired(String token) {
         return extractExpiration(token).before(new Date());
     }
+
 
     @Override
     public boolean isTokenValid(String token, UserDetails userDetails) {

@@ -9,6 +9,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/lessons/v1")
 @RequiredArgsConstructor
@@ -21,6 +23,18 @@ public class LessonController {
     public ResponseEntity<LessonEntityResponse> addLessonToCourse(@PathVariable Long courseId,
                                                                   @RequestBody LessonRequest lessonRequest) {
         Lesson lesson = lessonService.addLessonToCourse(courseId, lessonRequest);
+        return ResponseEntity.ok(lessonResponseMapper.toResponse(lesson));
+    }
+
+    @GetMapping("/courses/{courseId}")
+    public ResponseEntity<List<LessonEntityResponse>> getLessonsByCourseId(@PathVariable Long courseId) {
+        List<Lesson> lessons = lessonService.getLessonsByCourseId(courseId);
+        return ResponseEntity.ok(lessons.stream().map(lessonResponseMapper::toResponse).toList());
+    }
+
+    @GetMapping("/{lessonId}")
+    public ResponseEntity<LessonEntityResponse> getLessonById(@PathVariable Long lessonId) {
+        Lesson lesson = lessonService.getLessonById(lessonId);
         return ResponseEntity.ok(lessonResponseMapper.toResponse(lesson));
     }
 }

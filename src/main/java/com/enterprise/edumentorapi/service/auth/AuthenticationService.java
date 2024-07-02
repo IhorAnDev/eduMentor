@@ -13,4 +13,5 @@ public interface AuthenticationService {
     UserEntityResponse signIn(SignInRequest request);
 
     UserEntityResponse refreshToken(User user, String accessToken, String refreshToken);
+
 }

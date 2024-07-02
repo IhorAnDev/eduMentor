@@ -14,4 +14,5 @@ public class LessonResponseMapper {
         response.setIsMandatory(lesson.getIsMandatory());
         return response;
     }
+
 }

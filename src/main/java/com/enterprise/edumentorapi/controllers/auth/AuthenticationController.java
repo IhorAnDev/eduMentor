@@ -55,4 +55,5 @@ public class AuthenticationController {
         return ResponseEntity.ok(authenticationService.refreshToken(user, newAccessToken, newRefreshToken));
 
     }
+
 }
