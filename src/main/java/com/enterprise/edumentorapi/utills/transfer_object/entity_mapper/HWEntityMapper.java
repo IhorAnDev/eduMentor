@@ -1,9 +1,8 @@
 package com.enterprise.edumentorapi.utills.transfer_object.entity_mapper;
 
-import com.enterprise.edumentorapi.entity.AssignmentHw;
-import com.enterprise.edumentorapi.entity.HomeWork;
-import com.enterprise.edumentorapi.entity.Lesson;
+import com.enterprise.edumentorapi.entity.*;
 import com.enterprise.edumentorapi.payload.request.homework.AssigmentRequest;
+import com.enterprise.edumentorapi.payload.request.homework.HWAnswerRequest;
 import com.enterprise.edumentorapi.payload.request.homework.HWRequest;
 import org.springframework.stereotype.Component;
 
@@ -17,6 +16,7 @@ public class HWEntityMapper {
         homeWork.setDescription(hwRequest.getDescription());
         homeWork.setIsMandatory(hwRequest.isMandatory());
         homeWork.setAssignmentHw(toAssignmentHwEntity(hwRequest.getAssigmentRequest()));
+        lesson.setHomeWork(homeWork);
         return homeWork;
     }
 
@@ -25,5 +25,12 @@ public class HWEntityMapper {
         assignmentHw.setAssignmentTask(assigmentRequest.getAssignmentTask());
         assignmentHw.setAssigmentUrl(assigmentRequest.getAssigmentUrl());
         return assignmentHw;
+    }
+
+
+    public HomeworkAnswer toHomeworkAnswerEntity(HWAnswerRequest request) {
+        HomeworkAnswer homeworkAnswer = new HomeworkAnswer();
+        homeworkAnswer.setAnswerUrl(request.getAnswerUrl());
+        return homeworkAnswer;
     }
 }

@@ -21,6 +21,6 @@ public class HomeworkAnswer {
     @Column(name = "answer_url")
     private String answerUrl;
 
-    @OneToOne(mappedBy = "homeworkAnswer", cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "homeworkAnswer")
     private HomeWorkSubmission homeWorkSubmission;
 }

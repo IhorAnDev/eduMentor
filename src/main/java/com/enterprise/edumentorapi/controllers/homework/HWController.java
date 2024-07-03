@@ -1,8 +1,11 @@
 package com.enterprise.edumentorapi.controllers.homework;
 
 import com.enterprise.edumentorapi.entity.HomeWork;
+import com.enterprise.edumentorapi.entity.HomeWorkSubmission;
 import com.enterprise.edumentorapi.payload.request.homework.HWRequest;
+import com.enterprise.edumentorapi.payload.request.homework.HWSubmitRequest;
 import com.enterprise.edumentorapi.payload.response.homework.HWResponse;
+import com.enterprise.edumentorapi.payload.response.homework.HWSubmitResponse;
 import com.enterprise.edumentorapi.service.homework.HWService;
 import com.enterprise.edumentorapi.utills.transfer_object.response_mapper.HWResponseMapper;
 import lombok.RequiredArgsConstructor;
@@ -27,5 +30,11 @@ public class HWController {
         HomeWork hw = hwService.createHW(lessonId, hwRequest);
         HWResponse hwResponse = hwResponseMapper.toHWResponse(hw);
         return ResponseEntity.ok(hwResponse);
+    }
+
+    @PostMapping("submit/{hwId}")
+    public ResponseEntity<HWSubmitResponse> submitHW(@PathVariable Long hwId, @RequestBody HWSubmitRequest hwSubmitRequest) {
+        HomeWorkSubmission hwSubmission = hwService.submitHW(hwId, hwSubmitRequest);
+        return ResponseEntity.ok(hwResponseMapper.toHWSubmitResponse(hwSubmission));
     }
 }

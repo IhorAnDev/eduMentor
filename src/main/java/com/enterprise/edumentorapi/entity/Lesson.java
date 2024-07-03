@@ -40,7 +40,7 @@ public class Lesson {
     @Column(name = "video_url")
     private String videoUrl;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "hw_id", referencedColumnName = "hw_id")
     private HomeWork homeWork;
 }

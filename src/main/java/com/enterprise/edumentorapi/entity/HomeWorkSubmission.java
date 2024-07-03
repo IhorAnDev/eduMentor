@@ -29,7 +29,7 @@ public class HomeWorkSubmission {
     @JoinColumn(name = "hw_id")
     private HomeWork homeWork;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "hw_answer_id")
     private HomeworkAnswer homeworkAnswer;
 

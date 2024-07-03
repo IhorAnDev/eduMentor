@@ -8,14 +8,10 @@ import java.util.List;
 
 @Data
 @NoArgsConstructor
-@Component
 public class QuizSubmissionResponse {
-
     private Long id;
     private Long userId;
     private Long quizId;
     private QuizSubmissionResult details;
     private List<AnswerDetail> answers;
-
-
 }

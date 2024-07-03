@@ -12,6 +12,7 @@ import com.enterprise.edumentorapi.payload.response.qiuz.QuizSubmissionResult;
 import com.enterprise.edumentorapi.repository.*;
 import com.enterprise.edumentorapi.security.PersonDetails;
 import com.enterprise.edumentorapi.service.lesson.LessonService;
+import com.enterprise.edumentorapi.utills.SecurityUtils;
 import com.enterprise.edumentorapi.utills.transfer_object.entity_mapper.QuizMapper;
 import com.enterprise.edumentorapi.utills.transfer_object.response_mapper.QuizResponseMapper;
 import jakarta.transaction.Transactional;
@@ -88,8 +89,7 @@ public class QuizServiceImpl implements QuizService {
     @Transactional
     public QuizSubmission submitQuiz(Long quizId, QuizSubmissionRequest submissionRequest) {
         Quiz quiz = getQuizById(quizId);
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        User user = ((PersonDetails) authentication.getPrincipal()).getUser();
+        User user = SecurityUtils.getCurrentUser();
 
         QuizSubmission quizSubmission = new QuizSubmission();
         quizSubmission.setUser(user);
