@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 
 @RestController
 @RequestMapping("/api/v1/homework")
@@ -36,5 +38,10 @@ public class HWController {
     public ResponseEntity<HWSubmitResponse> submitHW(@PathVariable Long hwId, @RequestBody HWSubmitRequest hwSubmitRequest) {
         HomeWorkSubmission hwSubmission = hwService.submitHW(hwId, hwSubmitRequest);
         return ResponseEntity.ok(hwResponseMapper.toHWSubmitResponse(hwSubmission));
+    }
+
+    @GetMapping("lesson/{lessonId}")
+    public ResponseEntity<List<HWResponse>> getHWSubmissionsByLessonId(@PathVariable Long lessonId) {
+        return null;
     }
 }
