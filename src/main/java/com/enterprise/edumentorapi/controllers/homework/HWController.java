@@ -4,6 +4,7 @@ import com.enterprise.edumentorapi.entity.HomeWork;
 import com.enterprise.edumentorapi.entity.HomeWorkSubmission;
 import com.enterprise.edumentorapi.payload.request.homework.HWRequest;
 import com.enterprise.edumentorapi.payload.request.homework.HWSubmitRequest;
+import com.enterprise.edumentorapi.payload.response.homework.AnswerToHWResponse;
 import com.enterprise.edumentorapi.payload.response.homework.HWResponse;
 import com.enterprise.edumentorapi.payload.response.homework.HWSubmitResponse;
 import com.enterprise.edumentorapi.service.homework.HWService;
@@ -27,7 +28,7 @@ public class HWController {
     private final HWService hwService;
     private final HWResponseMapper hwResponseMapper;
 
-    @PostMapping("lesson/{lessonId}/create")
+    @PostMapping("lessons/{lessonId}/create")
     public ResponseEntity<HWResponse> createHW(@PathVariable Long lessonId, @RequestBody HWRequest hwRequest) {
         HomeWork hw = hwService.createHW(lessonId, hwRequest);
         HWResponse hwResponse = hwResponseMapper.toHWResponse(hw);
@@ -40,8 +41,9 @@ public class HWController {
         return ResponseEntity.ok(hwResponseMapper.toHWSubmitResponse(hwSubmission));
     }
 
-    @GetMapping("lesson/{lessonId}")
-    public ResponseEntity<List<HWResponse>> getHWSubmissionsByLessonId(@PathVariable Long lessonId) {
-        return null;
+    @GetMapping("lessons/{lessonId}/homework/answers")
+    public ResponseEntity<List<AnswerToHWResponse>> getHWSubmissionsByLessonId(@PathVariable Long lessonId) {
+        List<AnswerToHWResponse> answerToHWResponses = hwService.getCustomAnswersByLessonId(lessonId);
+        return ResponseEntity.ok(answerToHWResponses);
     }
 }

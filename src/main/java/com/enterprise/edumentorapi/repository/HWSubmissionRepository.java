@@ -14,7 +14,7 @@ public interface HWSubmissionRepository extends JpaRepository<HomeWorkSubmission
 
     @Query("SELECT new com.enterprise.edumentorapi.utills.transfer_object.HomeworkAnswerDTO(" +
             "l.lessonId, hwans.homeworkAnswerId, hwans.answerUrl, " +
-            "hw.homeWorkId, assign.assigmentUrl, assign.assignmentId) " +
+            "hw.homeWorkId, assign.assigmentUrl, assign.assignmentId, hs.user.userId) " +
             "FROM HomeWorkSubmission hs " +
             "JOIN hs.homeWork hw " +
             "JOIN hw.lesson l " +

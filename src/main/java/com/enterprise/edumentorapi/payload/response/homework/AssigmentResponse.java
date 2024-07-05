@@ -8,7 +8,6 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 public class AssigmentResponse {
-
     private String assignmentTask;
     private String assigmentUrl;
 }
