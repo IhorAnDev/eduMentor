@@ -21,7 +21,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.slf4j.Logger;
 
-
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -58,7 +58,7 @@ public class UserServiceImpl implements UserService {
                 .lastName(userRequest.getLastName())
                 .email(userRequest.getEmail())
                 .password(passwordEncoder.encode(userRequest.getPassword()))
-                .userRole(UserRole.STUDENT)
+                .userRoles(Collections.singleton(UserRole.STUDENT))
                 .build();
 
         userRepository.save(newUser);

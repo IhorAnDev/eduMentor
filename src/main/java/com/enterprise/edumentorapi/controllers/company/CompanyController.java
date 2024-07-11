@@ -15,6 +15,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collections;
 import java.util.List;
 
 @RestController
@@ -31,7 +32,7 @@ public class CompanyController {
 
         if (principal instanceof PersonDetails) {
             User user = ((PersonDetails) principal).getUser();
-            user.setUserRole(UserRole.ADMIN);
+            user.setUserRoles(Collections.singleton(UserRole.ADMIN));
             Company company = companyTransferObject.fromRequestCompany(request, user);
             companyService.createCompany(company);
             return ResponseEntity.ok().build();

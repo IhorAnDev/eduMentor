@@ -7,6 +7,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -50,7 +51,11 @@ public class User {
     private Set<CompanyStudent> companyStudents;
 
     @Enumerated(EnumType.STRING)
-    private UserRole userRole;
+    @ElementCollection(fetch = FetchType.EAGER)
+    @CollectionTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"))
+    @Column(name = "role")
+    private Set<UserRole> userRoles = new HashSet<>();
+
 
     @OneToOne(mappedBy = "owner", cascade = CascadeType.ALL)
     private Company ownedCompany;

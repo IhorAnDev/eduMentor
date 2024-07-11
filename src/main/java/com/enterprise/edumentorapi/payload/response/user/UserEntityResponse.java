@@ -1,8 +1,11 @@
 package com.enterprise.edumentorapi.payload.response.user;
 
+import com.enterprise.edumentorapi.enums.UserRole;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.Set;
 
 @Data
 @NoArgsConstructor
@@ -14,6 +17,6 @@ public class UserEntityResponse {
     private String email;
     private String token;
     private String refreshToken;
-    private String role;
+    private Set<UserRole> roles;
 
 }

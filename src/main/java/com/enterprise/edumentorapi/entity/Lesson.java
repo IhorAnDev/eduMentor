@@ -34,9 +34,6 @@ public class Lesson {
     @JoinColumn(name = "quiz_id")
     private Quiz quiz;
 
-    @Column(name = "video_id")
-    private String videoId;
-
     @Column(name = "video_url")
     private String videoUrl;
 

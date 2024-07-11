@@ -13,7 +13,7 @@ public class UserResponseMapper {
         response.setFirstName(user.getFirstName());
         response.setLastName(user.getLastName());
         response.setEmail(user.getEmail());
-        response.setRole(user.getUserRole().name());
+        response.setRoles(user.getUserRoles());
         response.setToken(token);
         response.setRefreshToken(refreshToken);
         return response;

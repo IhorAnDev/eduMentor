@@ -15,7 +15,7 @@ public class UserTransferObject {
         response.setFirstName(user.getFirstName());
         response.setLastName(user.getLastName());
         response.setEmail(user.getEmail());
-        response.setRole(user.getUserRole().name());
+        response.setRoles(user.getUserRoles());
         return response;
     }
 
